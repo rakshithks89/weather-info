@@ -1,22 +1,21 @@
-# Do not change version. This is the version of aws buildspec, not the version of your buldspec file.
 version: 0.2
+
 phases:
+  install:
+    runtime-versions:
+      nodejs: 18
   pre_build:
     commands:
-      #installs dependencies into the node_modules/ directory
+      - echo "Installing dependencies using node 18"
       - npm install
+
   build:
     commands:
-      - echo Build started on `date`
-      - echo Compiling
+      - echo "Building the React Project"
       - npm run build
-  post_build:
-    commands:
-      - echo Build completed on `date`
-# Include only the files required for your application to run.
+
 artifacts:
   files:
-    - build/**/*
-    - appspec.yml
-    - scripts/before_install.sh
-    - scripts/start_server.sh
+    - "**/*"
+  discard-paths: no
+  base-directory: build
